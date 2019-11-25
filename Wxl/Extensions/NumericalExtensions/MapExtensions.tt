@@ -1,0 +1,127 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#
+	Dictionary<string, string> integerExtensionTypes = new Dictionary<string, string>
+	{
+		{ "ulong", "ToUInt64"},
+		{ "long", "ToInt64"},
+		
+		{ "uint", "ToUInt32"},
+		{ "int", "ToInt32"},
+
+		{ "ushort", "ToUInt16"},
+		{ "short", "ToInt16"},
+
+		{ "sbyte", "ToSByte"},
+		{ "byte", "ToByte"},
+	};
+
+	string[] floatingPointTypes = new []
+	{
+		"decimal",
+		"double",
+		"float"
+	};
+#>
+/*******************************************************************************
+*                                                                              *
+*                            THIS FILE IS GENERATED                            *
+*                                                                              *
+*******************************************************************************/
+using System;
+using Wxl.Extensions.NumericalExtensions.Helpers;
+
+namespace Wxl.Extensions.NumericalExtensions
+{
+	public static class MapExtensions
+	{
+		<# // ****************************************************************** #>
+		<# // *                                                                * #>
+		<# // *          Create map implementations for integer types          * #>
+		<# // *                                                                * #>
+		<# // ****************************************************************** #>
+		<#
+		foreach (var typename in integerExtensionTypes)
+		{
+			var type = typename.Key;
+			var converter = typename.Value;
+		#>
+		
+		/// <summary>
+        /// Map a value from one range to another
+        /// </summary>
+        /// <param name="value">Value to map</param>
+        /// <param name="sourceMin">From range min value</param>
+        /// <param name="sourceMax">From range max value</param>
+        /// <param name="targetMin">To range min value</param>
+        /// <param name="targetMax">To range max value</param>
+        /// <param name="mode">Rounding mode</param>
+        /// <returns>Returns the mapped value</returns>
+		public static <#= type #> Map(this <#= type #> value, <#= type #> sourceMin, <#= type #> sourceMax, <#= type #> targetMin, <#= type #> targetMax, MidpointRounding mode)
+        {
+            var mappedAndRoundedValue = MapAndRound(value, sourceMin, sourceMax, targetMin, targetMax, mode);
+            var result = Convert.<#= converter #>(mappedAndRoundedValue);
+
+            return result;
+        }
+
+		/// <summary>
+        /// Map a value from one range to another. Utilizes <see cref="MidpointRounding.ToEven"/> when rounding mapped value to integer
+        /// </summary>
+        /// <param name="value">Value to map</param>
+        /// <param name="sourceMin">From range min value</param>
+        /// <param name="sourceMax">From range max value</param>
+        /// <param name="targetMin">To range min value</param>
+        /// <param name="targetMax">To range max value</param>
+        /// <returns>Returns the mapped value</returns>
+		public static <#= type #> Map(this <#= type #> value, <#= type #> sourceMin, <#= type #> sourceMax, <#= type #> targetMin, <#= type #> targetMax)
+        {
+            return value.Map(sourceMin, sourceMax, targetMin, targetMax, MidpointRounding.ToEven);
+        }
+
+		<#
+		}
+		#>
+
+		<# // ****************************************************************** #>
+		<# // *                                                                * #>
+		<# // *       Create map implementations for floating point types      * #>
+		<# // *                                                                * #>
+		<# // ****************************************************************** #>
+		<#
+		foreach (var type in floatingPointTypes)
+		{
+		#>
+		
+		/// <summary>
+        /// Map a value contained in a source range to value in a target range.
+        /// </summary>
+        /// <param name="value">Value to map</param>
+        /// <param name="sourceMin">From range min value</param>
+        /// <param name="sourceMax">From range max value</param>
+        /// <param name="targetMin">To range min value</param>
+        /// <param name="targetMax">To range max value</param>
+        /// <returns>Returns the mapped value</returns>
+		public static <#= type #> Map(this <#= type #> value, <#= type #> sourceMin, <#= type #> sourceMax, <#= type #> targetMin, <#= type #> targetMax)
+        {
+            return MapImplementations.MapImpl(value, sourceMin, sourceMax, targetMin, targetMax);
+        }
+
+		<#
+		}
+		#>
+
+		// Helper for integer map extensions
+		private static decimal MapAndRound(decimal value, decimal sourceMin, decimal sourceMax, decimal targetMin, decimal targetMax, MidpointRounding mode)
+		{
+			var mappedValue = MapImplementations.MapImpl(value, sourceMin, sourceMax, targetMin, targetMax);
+			var roundedValue = Math.Round(mappedValue, mode);
+            
+			return roundedValue;
+		}
+	}
+}

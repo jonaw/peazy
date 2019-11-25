@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29424.173
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wxl", "Wxl\Wxl.csproj", "{AEBCAB55-3636-45AE-8D41-827095C5B3DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wxl.Tests", "Wxl.Tests\Wxl.Tests.csproj", "{8F948206-1081-43E2-BB86-FE9CA6015C39}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AEBCAB55-3636-45AE-8D41-827095C5B3DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEBCAB55-3636-45AE-8D41-827095C5B3DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEBCAB55-3636-45AE-8D41-827095C5B3DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEBCAB55-3636-45AE-8D41-827095C5B3DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F948206-1081-43E2-BB86-FE9CA6015C39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F948206-1081-43E2-BB86-FE9CA6015C39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F948206-1081-43E2-BB86-FE9CA6015C39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F948206-1081-43E2-BB86-FE9CA6015C39}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F9CC8750-4A09-4875-B845-C91DBBAA14E3}
+	EndGlobalSection
+EndGlobal

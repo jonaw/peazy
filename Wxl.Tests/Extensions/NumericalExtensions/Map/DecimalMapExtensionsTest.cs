@@ -1,0 +1,32 @@
+﻿using Wxl.Extensions.NumericalExtensions;
+
+namespace Wxl.Tests.Extensions.NumericalExtensions.Map
+{
+
+    public class DecimalMapExtensionsTest : BaseMapTest<DecimalMapExtensionsTest, decimal>
+    {
+        protected override void NegativeFromRangeAndPositiveToRange()
+        {
+            _value = -50;
+            _fromMin = -100;
+            _fromMax = 0;
+            _toMin = 0;
+            _toMax = 1000;
+        }
+
+        protected override void ValidMappingValues()
+        {
+            _value = 2.5m;
+            _fromMin = 0;
+            _fromMax = 5;
+            _toMin = 0;
+            _toMax = 1000;
+        }
+
+        protected override decimal ValueMap()
+        {
+            return _value.Map(_fromMin, _fromMax, _toMin, _toMax);
+        }
+    }
+
+}

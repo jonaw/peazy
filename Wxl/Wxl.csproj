@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Wxl.Extensions</AssemblyName>
+    <NeutralLanguage></NeutralLanguage>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget></PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Extensions\NumericalExtensions\MapExtensions.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MapExtensions.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Extensions\NumericalExtensions\Helpers\MapImplementations.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MapImplementations.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Extensions\NumericalExtensions\MapExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MapExtensions.cs</LastGenOutput>
+    </None>
+    <None Update="Extensions\NumericalExtensions\Helpers\MapImplementations.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MapImplementations.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>
