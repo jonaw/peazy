@@ -43,5 +43,4 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-    vsTestVersion: "15.0"
     testAssemblyVer2: '**/bin/$(buildConfiguration)/**/Wxl.Tests.dll'
