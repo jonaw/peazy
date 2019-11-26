@@ -20,7 +20,7 @@ steps:
 - task: DotNetCoreInstaller@0
   inputs:
     packageType: sdk
-    version: '3.0.101'
+    version: '3.0.100'
 
 - task: NuGetCommand@2
   inputs:
