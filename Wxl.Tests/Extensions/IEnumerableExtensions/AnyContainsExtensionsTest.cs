@@ -36,6 +36,15 @@ namespace Wxl.Tests.Extensions.IEnumerableExtensions
         }
 
         [Test]
+        public void ReturnTrueWhenSourceHasElementsAndValueIsSubstringOfSourceElement()
+        {
+            Given.SourceHasElements();
+            And.ValueIsSubstringOfSourceElement();
+            And.SelectorIsValid();
+            Then.SourceAnyContains().Should().BeTrue();
+        }
+
+        [Test]
         public void ThrowWhenValueIsDefault()
         {
             Given.SourceHasElements();
@@ -55,7 +64,7 @@ namespace Wxl.Tests.Extensions.IEnumerableExtensions
                 .And.ParamName.Should().Be("selector");
         }
 
-        private bool SelectorContainsAny()
+        private bool SourceAnyContains()
         {
             return _source.AnyContains(_selector, _value, StringComparison.OrdinalIgnoreCase);
         }
