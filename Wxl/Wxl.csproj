@@ -9,8 +9,10 @@
     <Version>0.0.1</Version>
     <Authors>Jon Are Wisting</Authors>
     <Company />
-    <RepositoryUrl>https://github.com/jonaw/wxl</RepositoryUrl>
+    <RepositoryUrl>https://github.com/jonaw/wxl.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>Unlicense</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/jonaw/wxl</PackageProjectUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
