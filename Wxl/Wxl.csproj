@@ -4,8 +4,13 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Wxl.Extensions</AssemblyName>
     <NeutralLanguage></NeutralLanguage>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Version>0.0.1</Version>
+    <Authors>Jon Are Wisting</Authors>
+    <Company />
+    <RepositoryUrl>https://github.com/jonaw/wxl</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
