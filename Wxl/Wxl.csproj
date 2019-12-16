@@ -11,6 +11,7 @@
     <Company />
     <RepositoryUrl>https://github.com/jonaw/wxl</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <Description>An extension library for C# that aims to gather useful extension, and helper methods into one package.</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
