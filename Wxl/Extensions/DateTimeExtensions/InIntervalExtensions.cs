@@ -1,4 +1,5 @@
 ﻿using System;
+using Wxl.Internal;
 
 namespace Wxl.Extensions.DateTimeExtensions
 {
@@ -15,7 +16,8 @@ namespace Wxl.Extensions.DateTimeExtensions
         {
             if (intervalStart > intervalEnd)
             {
-                throw new ArgumentException($"DateTime of argument {nameof(intervalEnd)} must be past or equal to {nameof(intervalStart)}", nameof(intervalStart));
+                var message = $"Value of {nameof(intervalEnd)} must be greater or equal to {nameof(intervalStart)}";
+                throw ExceptionCreationHelpers.CreateArgumentNullException(nameof(intervalStart), message);
             }
 
             return dateTime >= intervalStart && dateTime <= intervalEnd;
