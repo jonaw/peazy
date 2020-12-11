@@ -44,3 +44,18 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
     testAssemblyVer2: '**/bin/$(buildConfiguration)/**/Wxl.Tests.dll'
+# - task: NuGetCommand@2
+#  inputs:
+#    command: 'pack'
+#    packagesToPack: '**\*.csproj;!**\*.Tests.csproj'
+#    versioningScheme: 'off'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'pack'
+    packagesToPack: '**\*.csproj;!**\*.Tests.csproj'
+    versioningScheme: 'off'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
