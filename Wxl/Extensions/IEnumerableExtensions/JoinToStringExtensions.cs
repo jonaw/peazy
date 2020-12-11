@@ -1,78 +1,103 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Wxl.Internal;
 
 namespace Wxl.Extensions.IEnumerableExtensions
 {
+
     public static class JoinToStringExtensions
     {
-        public static string JoinToString<T>(this IEnumerable<T> source, string separator, bool ignoreNullValues = false)
-        {
-            return JoinToStringImpl(source, separator, null, ignoreNullValues);
-        }
+        public static string JoinToString(this IEnumerable<string> source, string separator)
+            => JoinToStringImpl(source, separator, StringNullJoinStrategy.ReplaceWithEmptyString);
 
-        public static string JoinToString<T>(
-            this IEnumerable<T> source, 
+        public static string JoinToString(this IEnumerable<string> source, string separator, StringNullJoinStrategy nullStrategy)
+            => JoinToStringImpl(source, separator, nullStrategy);
+
+        public static string JoinToString<T>(this IEnumerable<T> source, Func<T, string> selector, string separator)
+            => JoinToStringImpl(source, separator, selector, StringNullJoinStrategy.ReplaceWithEmptyString);
+
+        public static string JoinToString<T>(this IEnumerable<T> source, Func<T, string> selector, string separator, StringNullJoinStrategy nullStrategy)
+            => JoinToStringImpl(source, separator, selector, nullStrategy);
+
+        private static string JoinToStringImpl(
+            IEnumerable<string> source,
             string separator,
-            Func<T, string> valueSelector,
-            bool ignoreNullValues = false)
+            StringNullJoinStrategy nullStrategy)
         {
-            return JoinToStringImpl(source, separator, valueSelector, ignoreNullValues);
+            var exception = ValidateArguments(source, separator);
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            return Impl(source, separator, nullStrategy);
         }
 
         private static string JoinToStringImpl<T>(
-            IEnumerable<T> source, 
-            string separator,  
-            Func<T, string> valueSelector = null,
-            bool ignoreNullValues = false)
+            IEnumerable<T> source,
+            string separator,
+            Func<T, string> selector,
+            StringNullJoinStrategy nullStrategy)
         {
-            var error = VerifyParams(source, separator, ignoreNullValues);
-            if (error != null)
+            var exception = ValidateArguments(source, separator) ?? ValidateArgument(selector);
+            if (exception != null)
             {
-                throw error;
+                throw exception;
             }
 
-            if (ignoreNullValues)
+            var values = source.Select(selector);
+            return Impl(values, separator, nullStrategy);
+        }
+
+        private static string Impl(
+            IEnumerable<string> source,
+            string separator,
+            StringNullJoinStrategy nullStrategy)
+        {
+            var values = ApplyNullStrategy(source, nullStrategy);
+            return string.Join(separator, values);
+        }
+
+        private static IEnumerable<string> ApplyNullStrategy(
+            IEnumerable<string> source,
+            StringNullJoinStrategy nullStrategy)
+        {
+            if (nullStrategy == StringNullJoinStrategy.DiscardValue)
             {
                 source = source.Where(v => v != null);
             }
-
-            var valuesToJoin = default(IEnumerable<string>);
-            if (valueSelector != null)
+            else if (nullStrategy == StringNullJoinStrategy.ReplaceWithEmptyString)
             {
-                valuesToJoin = source.Select(valueSelector);
-            }
-            else
-            {
-                valuesToJoin = source.Select(v => v.ToString());
+                source = source.Select(v => v ?? string.Empty);
             }
 
-            return string.Join(separator, valuesToJoin);
+            return source;
         }
 
-        private static Exception VerifyParams<T>(IEnumerable<T> source, string separator, bool ignoreNullValues)
+        private static Exception ValidateArgument<T>(Func<T, string> selector)
         {
-            if (source == null)
+            if (selector == null)
             {
-                return CreateArgumentNullException(nameof(source));
-            }
-
-            if (separator == null)
-            {
-                return CreateArgumentNullException(nameof(separator));
-            }
-
-            if (source.Any(value => value == null) && !ignoreNullValues)
-            {
-                return new ArgumentException($"Argument {nameof(source)} cannot contain any element equal to null", nameof(source));
+                return ExceptionCreationHelpers.CreateArgumentNullException(nameof(selector));
             }
 
             return null;
         }
 
-        private static ArgumentNullException CreateArgumentNullException(string paramName)
+        private static Exception ValidateArguments<T>(IEnumerable<T> source, string separator)
         {
-            return new ArgumentNullException(paramName, $"Argument {paramName} cannot be equal to null");
+            if (source == null)
+            {
+                return ExceptionCreationHelpers.CreateArgumentNullException(nameof(source));
+            }
+
+            if (separator == null)
+            {
+                return ExceptionCreationHelpers.CreateArgumentNullException(nameof(separator));
+            }
+
+            return null;
         }
     }
 }
