@@ -8,22 +8,22 @@ namespace Wxl.Extensions.IEnumerableExtensions
     public static class AnyStartsWithExtensions
     {
         public static bool AnyStartsWith(this IEnumerable<string> source, string value)
-            => AnyStartsWith(source, value, StringComparison.Ordinal, StringNullStrategy.None);
+            => AnyStartsWith(source, value, StringComparison.Ordinal, StringNullStrategy.Ignore);
 
         public static bool AnyStartsWith(this IEnumerable<string> source, string value, StringComparison comparisonType)
-            => AnyStartsWithImpl(source, value, comparisonType, StringNullStrategy.None);
+            => AnyStartsWithImpl(source, value, comparisonType, StringNullStrategy.Ignore);
 
         public static bool AnyStartsWith(this IEnumerable<string> source, string value, StringNullStrategy nullStrategy)
-            => AnyStartsWithImpl(source, value, StringComparison.Ordinal, StringNullStrategy.None);
+            => AnyStartsWithImpl(source, value, StringComparison.Ordinal, nullStrategy);
 
         public static bool AnyStartsWith(this IEnumerable<string> source, string value, StringComparison comparisonType, StringNullStrategy nullStrategy)
             => AnyStartsWithImpl(source, value, comparisonType, nullStrategy);
 
         public static bool AnyStartsWith<T>(this IEnumerable<T> source, Func<T, string> selector, string value)
-                => AnyStartsWith(source, selector, value, StringComparison.Ordinal, StringNullStrategy.None);
+                => AnyStartsWith(source, selector, value, StringComparison.Ordinal, StringNullStrategy.Ignore);
 
         public static bool AnyStartsWith<T>(this IEnumerable<T> source, Func<T, string> selector, string value, StringComparison comparisonType)
-            => AnyStartsWithImpl(source, selector, value, comparisonType, StringNullStrategy.None);
+            => AnyStartsWithImpl(source, selector, value, comparisonType, StringNullStrategy.Ignore);
 
         public static bool AnyStartsWith<T>(this IEnumerable<T> source, Func<T, string> selector, string value, StringNullStrategy nullStrategy)
             => AnyStartsWithImpl(source, selector, value, StringComparison.Ordinal, nullStrategy);
@@ -56,18 +56,8 @@ namespace Wxl.Extensions.IEnumerableExtensions
 
         public static bool Impl(this IEnumerable<string> source, string value, StringComparison comparisonType, StringNullStrategy nullStrategy)
         {
-            source = ApplyNullStrategy(source, nullStrategy);
+            source = source.ApplyNullStrategy(nullStrategy);
             return source.Any(v => v.StartsWith(value, comparisonType));
-        }
-
-        private static IEnumerable<string> ApplyNullStrategy(IEnumerable<string> source, StringNullStrategy nullStrategy)
-        {
-            if (nullStrategy == StringNullStrategy.Ignore)
-            {
-                return source.Where(v => v != default(string));
-            }
-
-            return source;
         }
 
         private static Exception ValidateArgument<T>(Func<T, string> selector)
