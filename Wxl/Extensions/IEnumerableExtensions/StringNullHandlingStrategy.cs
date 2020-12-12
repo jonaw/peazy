@@ -5,11 +5,4 @@ namespace Wxl.Extensions.IEnumerableExtensions
         None = 0,
         Ignore = 1
     }
-
-    public enum StringNullJoinStrategy : byte
-    {
-        None = 0,
-        DiscardValue = 1,
-        ReplaceWithEmptyString = 1
-    }
 }
