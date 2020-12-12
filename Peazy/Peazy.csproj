@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+    <AssemblyName>Peazy</AssemblyName>
+    <NeutralLanguage></NeutralLanguage>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Version>0.0.1</Version>
+    <Authors>Jon Are Wisting</Authors>
+    <Company />
+    <RepositoryUrl>https://github.com/jonaw/peazy.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Description>An extension library for C# that aims to gather useful extension, and helper methods into one package.</Description>
+    <PackageLicenseExpression>Unlicense</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/jonaw/peazy</PackageProjectUrl>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget></PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Extensions\NumericalExtensions\MapExtensions.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MapExtensions.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Extensions\NumericalExtensions\Helpers\MapImplementations.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MapImplementations.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Extensions\NumericalExtensions\MapExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MapExtensions.cs</LastGenOutput>
+    </None>
+    <None Update="Extensions\NumericalExtensions\Helpers\MapImplementations.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MapImplementations.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>
