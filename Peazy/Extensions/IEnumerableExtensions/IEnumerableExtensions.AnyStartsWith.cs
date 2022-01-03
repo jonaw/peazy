@@ -1,17 +1,17 @@
+﻿using Peazy.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Peazy.Internal;
 
-namespace Peazy.Extensions.IEnumerableExtensions
+namespace Peazy.Extensions
 {
-    public static class AnyStartsWithExtensions
+    public static partial class IEnumerableExtensions
     {
         public static bool AnyStartsWith(this IEnumerable<string> source, string value)
-            => AnyStartsWith(source, value, StringComparison.Ordinal, StringNullStrategy.Ignore);
+            => AnyStartsWith(source, value, StringComparison.Ordinal, StringNullStrategy.Skip);
 
         public static bool AnyStartsWith(this IEnumerable<string> source, string value, StringComparison comparisonType)
-            => AnyStartsWithImpl(source, value, comparisonType, StringNullStrategy.Ignore);
+            => AnyStartsWithImpl(source, value, comparisonType, StringNullStrategy.Skip);
 
         public static bool AnyStartsWith(this IEnumerable<string> source, string value, StringNullStrategy nullStrategy)
             => AnyStartsWithImpl(source, value, StringComparison.Ordinal, nullStrategy);
@@ -20,10 +20,10 @@ namespace Peazy.Extensions.IEnumerableExtensions
             => AnyStartsWithImpl(source, value, comparisonType, nullStrategy);
 
         public static bool AnyStartsWith<T>(this IEnumerable<T> source, Func<T, string> selector, string value)
-                => AnyStartsWith(source, selector, value, StringComparison.Ordinal, StringNullStrategy.Ignore);
+                => AnyStartsWith(source, selector, value, StringComparison.Ordinal, StringNullStrategy.Skip);
 
         public static bool AnyStartsWith<T>(this IEnumerable<T> source, Func<T, string> selector, string value, StringComparison comparisonType)
-            => AnyStartsWithImpl(source, selector, value, comparisonType, StringNullStrategy.Ignore);
+            => AnyStartsWithImpl(source, selector, value, comparisonType, StringNullStrategy.Skip);
 
         public static bool AnyStartsWith<T>(this IEnumerable<T> source, Func<T, string> selector, string value, StringNullStrategy nullStrategy)
             => AnyStartsWithImpl(source, selector, value, StringComparison.Ordinal, nullStrategy);
@@ -40,7 +40,7 @@ namespace Peazy.Extensions.IEnumerableExtensions
             }
 
             var values = source.Select(v => selector(v));
-            return Impl(values, value, comparisonType, nullStrategy);
+            return ASImpl(values, value, comparisonType, nullStrategy);
         }
 
         public static bool AnyStartsWithImpl(this IEnumerable<string> source, string value, StringComparison comparisonType, StringNullStrategy nullStrategy)
@@ -51,38 +51,15 @@ namespace Peazy.Extensions.IEnumerableExtensions
                 throw exception;
             }
 
-            return Impl(source, value, comparisonType, nullStrategy);
+            return ASImpl(source, value, comparisonType, nullStrategy);
         }
 
-        public static bool Impl(this IEnumerable<string> source, string value, StringComparison comparisonType, StringNullStrategy nullStrategy)
+        private static bool ASImpl(this IEnumerable<string> source, string value, StringComparison comparisonType, StringNullStrategy nullStrategy)
         {
             source = source.ApplyNullStrategy(nullStrategy);
             return source.Any(v => v.StartsWith(value, comparisonType));
         }
 
-        private static Exception ValidateArgument<T>(Func<T, string> selector)
-        {
-            if (selector == null)
-            {
-                return ExceptionCreationHelpers.CreateArgumentNullException(nameof(selector));
-            }
 
-            return null;
-        }
-
-        private static Exception ValidateArguments<T>(IEnumerable<T> source, string value)
-        {
-            if (source == null)
-            {
-                return ExceptionCreationHelpers.CreateArgumentNullException(nameof(source));
-            }
-
-            if (value == null)
-            {
-                return ExceptionCreationHelpers.CreateArgumentNullException(nameof(value));
-            }
-
-            return null;
-        }
     }
 }

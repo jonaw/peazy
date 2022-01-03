@@ -1,7 +1,7 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
+using Peazy.Extensions;
 using System;
-using Peazy.Extensions.IEnumerableExtensions;
-using FluentAssertions;
 
 namespace Peazy.Tests.Extensions.IEnumerableExtensions
 {
@@ -10,7 +10,6 @@ namespace Peazy.Tests.Extensions.IEnumerableExtensions
         private string[] _source;
         private string _value;
         private Func<string, string> _selector;
-        private StringComparison _comparisonType;
 
         public AnyContainsExtensionsTest()
         {

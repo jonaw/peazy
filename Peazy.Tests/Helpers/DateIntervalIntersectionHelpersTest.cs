@@ -1,9 +1,9 @@
-﻿using System;
-using FluentAssertions;
+﻿using FluentAssertions;
 using NUnit.Framework;
-using Peazy.Helpers.DateTimeHelpers;
+using Peazy.Helpers;
+using System;
 
-namespace Peazy.Tests.Helpers.DateTimeHelpers
+namespace Peazy.Tests.Helpers
 {
     public class DateIntervalIntersectionHelpersTest : BaseTest<DateIntervalIntersectionHelpersTest>
     {
@@ -107,7 +107,7 @@ namespace Peazy.Tests.Helpers.DateTimeHelpers
 
         private bool IntervalsIntersect()
         {
-            return DateHelpers.IntervalsIntersect(
+            return DateTimeHelpers.IntervalsIntersect(
                 _aIntervalStart,
                 _aIntervalEnd,
                 _bIntervalStart,
@@ -123,7 +123,7 @@ namespace Peazy.Tests.Helpers.DateTimeHelpers
 
         private bool IntervalsIntersectWithInterval()
         {
-            return DateHelpers.IntervalsIntersect(
+            return DateTimeHelpers.IntervalsIntersect(
                 _intervalStart,
                 _intervalEnd
                 );

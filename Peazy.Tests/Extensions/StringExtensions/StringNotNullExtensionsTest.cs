@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
-using System;
-using Peazy.Extensions.StringExtensions;
+using Peazy.Extensions;
 using Peazy.Tests.Extensions.StringExtensionsTests.Base;
+using System;
 
 namespace Peazy.Tests.Extensions.StringExtensionsTests
 {
@@ -58,12 +58,12 @@ namespace Peazy.Tests.Extensions.StringExtensionsTests
 
         private bool StringNotNullAndNotEmpty()
         {
-            return _string.NotNullAndNotEmpty();
+            return _string.HasContentOrWhitespace();
         }
 
         private bool StringNotNullAndNotWhiteSpace()
         {
-            return _string.NotNullAndNotWhiteSpace();
+            return _string.HasContent();
         }
 
         private Action StringNotNullAndNotWhiteSpaceAsAction()

@@ -1,7 +1,7 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
+using Peazy.Extensions;
 using System;
-using Peazy.Extensions.StringExtensions;
-using FluentAssertions;
 
 namespace Peazy.Tests.Extensions.StringExtensionsTests
 {
@@ -68,7 +68,7 @@ namespace Peazy.Tests.Extensions.StringExtensionsTests
 
         private bool ValueShorterLengthThan()
         {
-            return _value.ShorterLengthThan(_length);
+            return _value.IsShorterThan(_length);
         }
 
         private Action ValueShorterLengthThanAsAction()
@@ -78,7 +78,7 @@ namespace Peazy.Tests.Extensions.StringExtensionsTests
 
         private bool ValueLongerLengthThan()
         {
-            return _value.LongerLengthThan(_length);
+            return _value.IsLongerThan(_length);
         }
 
         private Action ValueLongerLengthThanAsAction()

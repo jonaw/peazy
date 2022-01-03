@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Peazy.Internal;
 
-namespace Peazy.Extensions.IEnumerableExtensions
+namespace Peazy.Extensions
 {
-
-    public static class JoinToStringExtensions
+    public static partial class IEnumerableExtensions
     {
         public static string JoinToString(this IEnumerable<string> source, string separator)
             => JoinToStringImpl(source, separator, StringNullJoinStrategy.ReplaceWithEmptyString);
@@ -63,7 +61,7 @@ namespace Peazy.Extensions.IEnumerableExtensions
             IEnumerable<string> source,
             StringNullJoinStrategy nullStrategy)
         {
-            if (nullStrategy == StringNullJoinStrategy.DiscardValue)
+            if (nullStrategy == StringNullJoinStrategy.Skip)
             {
                 source = source.Where(v => v != null);
             }
@@ -73,31 +71,6 @@ namespace Peazy.Extensions.IEnumerableExtensions
             }
 
             return source;
-        }
-
-        private static Exception ValidateArgument<T>(Func<T, string> selector)
-        {
-            if (selector == null)
-            {
-                return ExceptionCreationHelpers.CreateArgumentNullException(nameof(selector));
-            }
-
-            return null;
-        }
-
-        private static Exception ValidateArguments<T>(IEnumerable<T> source, string separator)
-        {
-            if (source == null)
-            {
-                return ExceptionCreationHelpers.CreateArgumentNullException(nameof(source));
-            }
-
-            if (separator == null)
-            {
-                return ExceptionCreationHelpers.CreateArgumentNullException(nameof(separator));
-            }
-
-            return null;
         }
     }
 }

@@ -1,7 +1,7 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
+using Peazy.Extensions;
 using System;
-using Peazy.Extensions.DateTimeExtensions;
-using FluentAssertions;
 
 namespace Peazy.Tests.Extensions.DateTimeExtensions
 {
@@ -88,12 +88,12 @@ namespace Peazy.Tests.Extensions.DateTimeExtensions
 
         private bool ValueIsInInterval()
         {
-            return _value.InInterval(_intervalStart, _intervalEnd);
+            return _value.IsInInterval(_intervalStart, _intervalEnd);
         }
 
         private Action ValueIsInIntervalAsAction()
         {
             return () => ValueIsInInterval();
-        }    
+        }
     }
 }

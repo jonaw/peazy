@@ -1,4 +1,4 @@
-﻿using Peazy.Extensions.NumericalExtensions;
+﻿using Peazy.Extensions;
 
 namespace Peazy.Tests.Extensions.NumericalExtensions.Map
 {

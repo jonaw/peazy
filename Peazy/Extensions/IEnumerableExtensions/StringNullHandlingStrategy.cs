@@ -1,8 +1,8 @@
-namespace Peazy.Extensions.IEnumerableExtensions
+namespace Peazy.Extensions
 {
     public enum StringNullStrategy : byte
     {
         None = 0,
-        Ignore = 1
+        Skip = 1
     }
 }

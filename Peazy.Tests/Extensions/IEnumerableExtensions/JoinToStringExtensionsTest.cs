@@ -1,7 +1,7 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
+using Peazy.Extensions;
 using System;
-using Peazy.Extensions.IEnumerableExtensions;
-using FluentAssertions;
 using System.Linq;
 
 namespace Peazy.Tests.Extensions.IEnumerableExtensions
@@ -11,7 +11,6 @@ namespace Peazy.Tests.Extensions.IEnumerableExtensions
         private string[] _values;
         private string _result;
         private string _delimiter;
-        private bool _ignoreNullValues;
         private Func<string, string> _valueSelector;
 
         public JoinToStringExtensionsTest()
@@ -24,7 +23,6 @@ namespace Peazy.Tests.Extensions.IEnumerableExtensions
         {
             _result = "0123456789,0123456789";
             _delimiter = ",";
-            _ignoreNullValues = false;
             _valueSelector = null;
         }
 
@@ -134,14 +132,13 @@ namespace Peazy.Tests.Extensions.IEnumerableExtensions
 
         private void IgnoreNullValues()
         {
-            _ignoreNullValues = true;
         }
 
         private void ValueSelectorGetsFirstFiveCharacters()
         {
             _valueSelector = (str) =>
             {
-                return str.Substring(0, 5);
+                return str[..5];
             };
         }
 
@@ -170,7 +167,7 @@ namespace Peazy.Tests.Extensions.IEnumerableExtensions
 
         private string ValuesJoinedToString()
         {
-            return _values.JoinToString(_delimiter, _valueSelector, _ignoreNullValues);
+            return _values.JoinToString(_valueSelector, _delimiter, StringNullJoinStrategy.Skip);
         }
 
         private Action ValuesJoinedToStringAsAction()

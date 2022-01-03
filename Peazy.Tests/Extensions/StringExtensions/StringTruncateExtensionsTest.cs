@@ -1,7 +1,7 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
+using Peazy.Extensions;
 using System;
-using Peazy.Extensions.StringExtensions;
-using FluentAssertions;
 
 namespace Peazy.Tests.Extensions.StringExtensionsTests
 {
@@ -60,7 +60,7 @@ namespace Peazy.Tests.Extensions.StringExtensionsTests
             And.ExpectedValueContains5Characters();
             Then.StringTruncate().Should().Be(ExpectedValue());
         }
-    
+
         private void ValueIsDefault()
         {
             _value = default;

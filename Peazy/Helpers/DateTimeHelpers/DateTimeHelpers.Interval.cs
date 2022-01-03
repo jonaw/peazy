@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace Peazy.Helpers.DateTimeHelpers
+namespace Peazy.Helpers
 {
-    public static partial class DateHelpers
+    public static partial class DateTimeHelpers
     {
         /// <summary>
-        /// Determine if two intervals intersectm inclusive
+        /// Determine if two intervals intersect, inclusive
         /// </summary>
         /// <param name="intervalStartA">Start of interval a</param>
         /// <param name="intervalEndA">End of interval a</param>

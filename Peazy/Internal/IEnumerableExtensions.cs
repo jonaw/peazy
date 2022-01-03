@@ -1,6 +1,6 @@
+using Peazy.Extensions;
 using System.Collections.Generic;
 using System.Linq;
-using Peazy.Extensions.IEnumerableExtensions;
 
 namespace Peazy.Internal
 {
@@ -8,7 +8,7 @@ namespace Peazy.Internal
     {
         internal static IEnumerable<T> ApplyNullStrategy<T>(this IEnumerable<T> source, StringNullStrategy nullStrategy)
         {
-            if (nullStrategy == StringNullStrategy.Ignore)
+            if (nullStrategy == StringNullStrategy.Skip)
             {
                 return source.Where(v => v != null);
             }

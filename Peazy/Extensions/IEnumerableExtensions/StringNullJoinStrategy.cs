@@ -1,9 +1,9 @@
-namespace Peazy.Extensions.IEnumerableExtensions
+namespace Peazy.Extensions
 {
     public enum StringNullJoinStrategy : byte
     {
         None = 0,
-        DiscardValue = 1,
-        ReplaceWithEmptyString = 1
+        Skip = 1,
+        ReplaceWithEmptyString = 2
     }
 }

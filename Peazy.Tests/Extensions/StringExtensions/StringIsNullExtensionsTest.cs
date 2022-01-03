@@ -1,8 +1,8 @@
-using NUnit.Framework;
-using System;
-using Peazy.Extensions.StringExtensions;
 using FluentAssertions;
+using NUnit.Framework;
+using Peazy.Extensions;
 using Peazy.Tests.Extensions.StringExtensionsTests.Base;
+using System;
 
 namespace Peazy.Tests.Extensions.StringExtensionsTests
 {

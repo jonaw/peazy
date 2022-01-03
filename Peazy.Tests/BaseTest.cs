@@ -3,9 +3,11 @@
     public abstract class BaseTest<T>
     {
         protected T _test;
-        
-        public T Given { 
-            get {
+
+        public T Given
+        {
+            get
+            {
                 return _test;
             }
         }

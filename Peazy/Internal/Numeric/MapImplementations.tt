@@ -19,14 +19,17 @@
 *******************************************************************************/
 using System;
 
-namespace Wxl.Extensions.NumericalExtensions.Helpers
+namespace Peazy.Internal.Numeric
 {
-	internal static class MapImplementations
+	internal static class NumericMapImplementations
 	{
 		<#
 		foreach (var type in types)
 		{
 		#>
+
+
+		// ! THIS FILE IS GENERATED !
 
 		internal static <#= type #> MapImpl(<#= type #> value, <#= type #> sourceMin, <#= type #> sourceMax, <#= type #> targetMin, <#= type #> targetMax)
         {
@@ -40,6 +43,9 @@ namespace Wxl.Extensions.NumericalExtensions.Helpers
 
             return result;
         }
+
+
+		// ! THIS FILE IS GENERATED !
 
 		internal static Exception MapImplArgumentCheck(<#= type #> value, <#= type #> sourceMin, <#= type #> sourceMax, <#= type #> targetMin, <#= type #> targetMax)
 		{

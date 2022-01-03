@@ -1,9 +1,9 @@
-﻿using System;
-using Peazy.Internal;
+﻿using Peazy.Internal;
+using System;
 
-namespace Peazy.Extensions.DateTimeExtensions
+namespace Peazy.Extensions
 {
-    public static class InIntervalExtensions
+    public static partial class DateTimeExtensions
     {
         /// <summary>
         /// Determines if a DateTime is within an interval, inclusive
@@ -12,7 +12,7 @@ namespace Peazy.Extensions.DateTimeExtensions
         /// <param name="intervalStart">Interval start</param>
         /// <param name="intervalEnd">Interval end</param>
         /// <returns>Whether value exist in interval</returns>
-        public static bool InInterval(this DateTime dateTime, DateTime intervalStart, DateTime intervalEnd)
+        public static bool IsInInterval(this DateTime dateTime, DateTime intervalStart, DateTime intervalEnd)
         {
             if (intervalStart > intervalEnd)
             {

@@ -9,7 +9,7 @@
 	{
 		{ "ulong", "ToUInt64"},
 		{ "long", "ToInt64"},
-		
+
 		{ "uint", "ToUInt32"},
 		{ "int", "ToInt32"},
 
@@ -33,9 +33,9 @@
 *                                                                              *
 *******************************************************************************/
 using System;
-using Wxl.Extensions.NumericalExtensions.Helpers;
+using Peazy.Internal.Numeric;
 
-namespace Wxl.Extensions.NumericalExtensions
+namespace Peazy.Extensions
 {
 	public static class MapExtensions
 	{
@@ -50,37 +50,40 @@ namespace Wxl.Extensions.NumericalExtensions
 			var type = typename.Key;
 			var converter = typename.Value;
 		#>
-		
-		/// <summary>
-        /// Map a value from one range to another
-        /// </summary>
-        /// <param name="value">Value to map</param>
-        /// <param name="sourceMin">From range min value</param>
-        /// <param name="sourceMax">From range max value</param>
-        /// <param name="targetMin">To range min value</param>
-        /// <param name="targetMax">To range max value</param>
-        /// <param name="mode">Rounding mode</param>
-        /// <returns>Returns the mapped value</returns>
-		public static <#= type #> Map(this <#= type #> value, <#= type #> sourceMin, <#= type #> sourceMax, <#= type #> targetMin, <#= type #> targetMax, MidpointRounding mode)
-        {
-            var mappedAndRoundedValue = MapAndRound(value, sourceMin, sourceMax, targetMin, targetMax, mode);
-            var result = Convert.<#= converter #>(mappedAndRoundedValue);
 
-            return result;
-        }
+		// ! THIS FILE IS GENERATED !
 
 		/// <summary>
         /// Map a value from one range to another. Utilizes <see cref="MidpointRounding.ToEven"/> when rounding mapped value to integer
         /// </summary>
         /// <param name="value">Value to map</param>
-        /// <param name="sourceMin">From range min value</param>
-        /// <param name="sourceMax">From range max value</param>
-        /// <param name="targetMin">To range min value</param>
-        /// <param name="targetMax">To range max value</param>
+        /// <param name="sourceMin">Source range minimum value</param>
+        /// <param name="sourceMax">Souce range maximum value</param>
+        /// <param name="targetMin">Target range minimum value</param>
+        /// <param name="targetMax">Target range maximum value</param>
         /// <returns>Returns the mapped value</returns>
 		public static <#= type #> Map(this <#= type #> value, <#= type #> sourceMin, <#= type #> sourceMax, <#= type #> targetMin, <#= type #> targetMax)
+			=> value.Map(sourceMin, sourceMax, targetMin, targetMax, MidpointRounding.ToEven);
+
+		/// <summary>
+        /// Map a value from one range to another
+        /// </summary>
+        /// <param name="value">Value to map</param>
+        /// <param name="sourceMin">Source range minimum value</param>
+        /// <param name="sourceMax">Souce range maximum value</param>
+        /// <param name="targetMin">Target range minimum value</param>
+        /// <param name="targetMax">Target range maximum value</param>
+        /// <param name="mode">Rounding mode</param>
+        /// <returns>Returns the mapped value</returns>
+		public static <#= type #> Map(this <#= type #> value, <#= type #> sourceMin, <#= type #> sourceMax, <#= type #> targetMin, <#= type #> targetMax, MidpointRounding roundingMode)
+			=> MapImpl(value, sourceMin, sourceMax, targetMin, targetMax, roundingMode);
+
+		private static <#= type #> MapImpl(<#= type #> value, <#= type #> sourceMin, <#= type #> sourceMax, <#= type #> targetMin, <#= type #> targetMax, MidpointRounding roundingMode)
         {
-            return value.Map(sourceMin, sourceMax, targetMin, targetMax, MidpointRounding.ToEven);
+            var mappedAndRoundedValue = MapAndRound(value, sourceMin, sourceMax, targetMin, targetMax, roundingMode);
+            var result = Convert.<#= converter #>(mappedAndRoundedValue);
+
+            return result;
         }
 
 		<#
@@ -96,31 +99,32 @@ namespace Wxl.Extensions.NumericalExtensions
 		foreach (var type in floatingPointTypes)
 		{
 		#>
-		
+
+		// ! THIS FILE IS GENERATED !
+
 		/// <summary>
         /// Map a value contained in a source range to value in a target range.
         /// </summary>
         /// <param name="value">Value to map</param>
-        /// <param name="sourceMin">From range min value</param>
-        /// <param name="sourceMax">From range max value</param>
-        /// <param name="targetMin">To range min value</param>
-        /// <param name="targetMax">To range max value</param>
+        /// <param name="sourceMin">Source range minimum value</param>
+        /// <param name="sourceMax">Souce range maximum value</param>
+        /// <param name="targetMin">Target range minimum value</param>
+        /// <param name="targetMax">Target range maximum value</param>
         /// <returns>Returns the mapped value</returns>
 		public static <#= type #> Map(this <#= type #> value, <#= type #> sourceMin, <#= type #> sourceMax, <#= type #> targetMin, <#= type #> targetMax)
-        {
-            return MapImplementations.MapImpl(value, sourceMin, sourceMax, targetMin, targetMax);
-        }
-
+			=> NumericMapImplementations.MapImpl(value, sourceMin, sourceMax, targetMin, targetMax);
 		<#
 		}
 		#>
 
+		// ! THIS FILE IS GENERATED !
+
 		// Helper for integer map extensions
-		private static decimal MapAndRound(decimal value, decimal sourceMin, decimal sourceMax, decimal targetMin, decimal targetMax, MidpointRounding mode)
+		private static decimal MapAndRound(decimal value, decimal sourceMin, decimal sourceMax, decimal targetMin, decimal targetMax, MidpointRounding roundingMode)
 		{
-			var mappedValue = MapImplementations.MapImpl(value, sourceMin, sourceMax, targetMin, targetMax);
-			var roundedValue = Math.Round(mappedValue, mode);
-            
+			var mappedValue = NumericMapImplementations.MapImpl(value, sourceMin, sourceMax, targetMin, targetMax);
+			var roundedValue = Math.Round(mappedValue, roundingMode);
+
 			return roundedValue;
 		}
 	}

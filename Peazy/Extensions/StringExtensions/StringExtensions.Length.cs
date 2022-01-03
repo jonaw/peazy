@@ -1,29 +1,47 @@
 ﻿using System;
 
-namespace Peazy.Extensions.StringExtensions
+namespace Peazy.Extensions
 {
-    public static class StringLengthExtensions
+    public static partial class StringExtensions
     {
         /// <summary>
         /// Determine if length of a given string is shorter than a given length
         /// </summary>
         /// <exception cref="ArgumentException">Thrown when <paramref name="length"/> is positive</exception>
-        public static bool ShorterLengthThan(this string value, int length)
-        {
-            return ShorterLengthThanImpl(value, length);
-        }
+        public static bool HasLength(this string value, int length)
+            => HasLengthImpl(value, length);
+
+        /// <summary>
+        /// Determine if length of a given string is shorter than a given length
+        /// </summary>
+        /// <exception cref="ArgumentException">Thrown when <paramref name="length"/> is positive</exception>
+        public static bool IsShorterThan(this string value, int length)
+            => IsShorterThanImpl(value, length);
 
         /// <summary>
         /// Ensure length of <paramref name="value"/> is longer than given <paramref name="length"/>
         /// </summary>
         /// <exception cref="ArgumentException">Thrown when <paramref name="length"/> is positive</exception>
-        public static bool LongerLengthThan(this string value, int length)
-        {
-            return LongerLengthThanImpl(value, length);
-        }
+        public static bool IsLongerThan(this string value, int length)
+            => IsLongerThanImpl(value, length);
 
         #region Implementations
-        private static bool ShorterLengthThanImpl(string value, int length)
+        private static bool HasLengthImpl(string value, int length)
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value), "Argument cannot be null");
+            }
+
+            if (length <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(length), $"Argument must be a positive integer");
+            }
+
+            return value.Length == length;
+        }
+
+        private static bool IsShorterThanImpl(string value, int length)
         {
             if (value == null)
             {
@@ -44,7 +62,7 @@ namespace Peazy.Extensions.StringExtensions
             return value.Length < length;
         }
 
-        private static bool LongerLengthThanImpl(string value, int length)
+        private static bool IsLongerThanImpl(string value, int length)
         {
             if (value == null)
             {

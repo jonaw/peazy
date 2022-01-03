@@ -1,6 +1,8 @@
-﻿namespace Peazy.Extensions.StringExtensions
+﻿using System.Linq;
+
+namespace Peazy.Extensions
 {
-    public static class StringContentExtensions
+    public static partial class StringExtensions
     {
         /// <summary>
         /// Determines whether a given string is null, empty or white-space
@@ -15,7 +17,7 @@
         /// Determines whether a given string is not null, not empty and not white-space
         /// </summary>
         /// <param name="value">String to test</param>
-        public static bool NotNullAndNotWhiteSpace(this string value)
+        public static bool HasContent(this string value)
         {
             return !string.IsNullOrWhiteSpace(value);
         }
@@ -33,9 +35,14 @@
         /// Determines whether a specific string is not null and not empty
         /// </summary>
         /// <param name="value">String to test</param>
-        public static bool NotNullAndNotEmpty(this string value)
+        public static bool HasContentOrWhitespace(this string value)
         {
             return value != null && value != string.Empty;
+        }
+
+        public static bool IsIntegerString(this string value)
+        {
+            return value.ToCharArray().All(c => char.IsDigit(c));
         }
     }
 }
