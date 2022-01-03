@@ -1,4 +1,4 @@
-# Wxl.Extensions
+# Peazy
 
 An extension library for C# that aims to gather useful extension, and helper methods into one package.
 
