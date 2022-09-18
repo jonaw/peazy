@@ -1,4 +1,4 @@
-﻿using Peazy.Internal;
+﻿using Peazy.Core;
 using System;
 
 namespace Peazy.Extensions
@@ -18,7 +18,8 @@ namespace Peazy.Extensions
         /// var truncated = x.Truncate(7);
         /// // truncated - "This is"
         /// </example>
-        public static string Truncate(this string value, int length) => TruncateImpl(value, length, out _);
+        public static string Truncate(this string value, int length)
+            => StringHelpers.Truncate(value, length, out _);
 
         /// <summary>
         /// Truncate string to length
@@ -34,38 +35,7 @@ namespace Peazy.Extensions
         /// var truncated = x.Truncate(7);
         /// // truncated - "This is"
         /// </example>
-        public static string Truncate(this string value, int length, out bool truncated) => TruncateImpl(value, length, out truncated);
-
-        private static string TruncateImpl(string value, int length, out bool truncated)
-        {
-            truncated = false;
-            if (value == null)
-            {
-                throw ExceptionCreationHelpers.CreateArgumentNullException(nameof(value));
-            }
-
-            if (length < 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(length), $"Argument must be a positive integer");
-            }
-
-            if (length == 0)
-            {
-                return string.Empty;
-            }
-
-            if (value.Length <= length)
-            {
-                return value;
-            }
-
-            truncated = true;
-
-            #if NETCOREAPP3_1_OR_GREATER
-            return value[..length];
-            #else
-            return value.Substring(0, length);
-            #endif
-        }
+        public static string Truncate(this string value, int length, out bool truncated)
+            => StringHelpers.Truncate(value, length, out truncated);
     }
 }

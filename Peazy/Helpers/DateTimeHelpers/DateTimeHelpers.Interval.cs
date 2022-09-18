@@ -7,18 +7,18 @@ namespace Peazy.Helpers
         /// <summary>
         /// Determine if two intervals intersect, inclusive
         /// </summary>
-        /// <param name="intervalStartA">Start of interval a</param>
-        /// <param name="intervalEndA">End of interval a</param>
-        /// <param name="intervalStartB">Start of interval b</param>
-        /// <param name="intervalEndB">End of interval b</param>
+        /// <param name="aStart">Start of interval a</param>
+        /// <param name="aEnd">End of interval a</param>
+        /// <param name="bStart">Start of interval b</param>
+        /// <param name="bEnd">End of interval b</param>
         /// <returns>Whether the intervals intersect</returns>
         public static bool IntervalsIntersect(
-            DateTime intervalStartA,
-            DateTime intervalEndA,
-            DateTime intervalStartB,
-            DateTime intervalEndB)
+            DateTime aStart,
+            DateTime aEnd,
+            DateTime bStart,
+            DateTime bEnd)
         {
-            return intervalStartA <= intervalEndB && intervalEndA >= intervalStartB;
+            return aStart <= bEnd && aEnd >= bStart;
         }
 
         /// <summary>

@@ -9,13 +9,9 @@ namespace Peazy.Internal
             => CreateArgumentNullException(paramName, $"Argument {paramName} cannot be equal to null");
 
         internal static ArgumentNullException CreateArgumentNullException(string paramName, string message)
-        {
-            return new ArgumentNullException(paramName, message);
-        }
+            => new ArgumentNullException(paramName, message);
 
         internal static ArgumentException CreateArgumentException(string paramName, string message)
-        {
-            return new ArgumentException(message, paramName);
-        }
+            => new ArgumentException(message, paramName);
     }
 }

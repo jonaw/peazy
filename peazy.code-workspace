@@ -1,0 +1,29 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.hg": true,
+      "**/CVS": true,
+      "**/.DS_Store": true,
+      "**/Thumbs.db": true,
+      "**/.angular/": true,
+      "**/.vs/": true,
+      "**/node_modules": true,
+      "**/bin": true,
+      "**/obj": true,
+      "./Wxl/": true,
+      "./Wxl.Tests": true
+    },
+    "cSpell.words": [
+      "cref",
+      "NETCOREAPP",
+      "paramref"
+    ],
+  }
+}

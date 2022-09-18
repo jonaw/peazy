@@ -1,22 +1,13 @@
-﻿using Peazy.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Peazy.Extensions;
+using Peazy.Internal;
 
-namespace Peazy.Extensions
+namespace Peazy.Core
 {
-    public static partial class IEnumerableExtensions
+    internal static partial class IEnumerableHelpers
     {
-        public static DateTime MinDateBy<T>(this IEnumerable<T> elements, Func<T, DateTime> selector)
-        {
-            return elements.Select(selector).Min();
-        }
-
-        public static DateTime MaxDateBy<T>(this IEnumerable<T> elements, Func<T, DateTime> selector)
-        {
-            return elements.Select(selector).Max();
-        }
-
         private static Exception ValidateArgument<T>(Func<T, string> selector)
         {
             if (selector == null)

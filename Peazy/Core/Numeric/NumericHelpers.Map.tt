@@ -19,21 +19,17 @@
 *******************************************************************************/
 using System;
 
-namespace Peazy.Internal.Numeric
+namespace Peazy.Core
 {
-	internal static class NumericMapImplementations
+	internal static partial class NumericHelpers
 	{
 		<#
 		foreach (var type in types)
 		{
 		#>
-
-
-		// ! THIS FILE IS GENERATED !
-
-		internal static <#= type #> MapImpl(<#= type #> value, <#= type #> sourceMin, <#= type #> sourceMax, <#= type #> targetMin, <#= type #> targetMax)
+		internal static <#= type #> Map(<#= type #> value, <#= type #> sourceMin, <#= type #> sourceMax, <#= type #> targetMin, <#= type #> targetMax)
         {
-            var exception = MapImplArgumentCheck(value, sourceMin, sourceMax, targetMin, targetMax);
+            var exception = ValidateMapArguments(value, sourceMin, sourceMax, targetMin, targetMax);
             if (exception != null)
             {
                 throw exception;
@@ -44,31 +40,25 @@ namespace Peazy.Internal.Numeric
             return result;
         }
 
-
-		// ! THIS FILE IS GENERATED !
-
-		internal static Exception MapImplArgumentCheck(<#= type #> value, <#= type #> sourceMin, <#= type #> sourceMax, <#= type #> targetMin, <#= type #> targetMax)
+		private static Exception ValidateMapArguments(<#= type #> value, <#= type #> sourceMin, <#= type #> sourceMax, <#= type #> targetMin, <#= type #> targetMax)
 		{
-			var exception = default(Exception);
-
 			if (value < sourceMin || value > sourceMax)
 			{
-				exception = new ArgumentException($"{nameof(value)} must not be less than {nameof(sourceMin)} or greater than {nameof(sourceMax)}");
+				return new ArgumentException($"{nameof(value)} must not be less than {nameof(sourceMin)} or greater than {nameof(sourceMax)}");
 			}
 			else if (sourceMin > sourceMax)
 			{
-				exception = new ArgumentException($"{nameof(value)} must not be less than {nameof(sourceMin)} or greater than {nameof(sourceMax)}");
+				return new ArgumentException($"{nameof(value)} must not be less than {nameof(sourceMin)} or greater than {nameof(sourceMax)}");
 			}
 			else if (targetMin > targetMax)
 			{
-				exception = new ArgumentException($"{nameof(targetMin)} must not be greater than {nameof(targetMax)}");
+				return new ArgumentException($"{nameof(targetMin)} must not be greater than {nameof(targetMax)}");
 			}
 
-			return exception;
+			return default;
 		}
 		<#
 		}
 		#>
-
 	}
 }

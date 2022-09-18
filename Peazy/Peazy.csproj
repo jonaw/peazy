@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0;netstandard2.0;net461</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net6.0;net461</TargetFrameworks>
     <AssemblyName>Peazy</AssemblyName>
     <NeutralLanguage></NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -46,6 +46,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MapImplementations.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="T4.Build" Version="0.2.4" />
   </ItemGroup>
 
 </Project>
