@@ -11,26 +11,22 @@ namespace Peazy.Helpers
         /// <param name="aEnd">End of interval a</param>
         /// <param name="bStart">Start of interval b</param>
         /// <param name="bEnd">End of interval b</param>
-        /// <returns>Whether the intervals intersect</returns>
+        /// <returns>Returns true if the intervals intersect, else false</returns>
         public static bool IntervalsIntersect(
             DateTime aStart,
             DateTime aEnd,
             DateTime bStart,
             DateTime bEnd)
-        {
-            return aStart <= bEnd && aEnd >= bStart;
-        }
+            => Core.DateTimeHelpers.IntervalsIntersect(aStart, aEnd, bStart, bEnd);
 
         /// <summary>
         /// Determine if two intervals intersect, inclusive
         /// </summary>
         /// <param name="a">Interval a</param>
         /// <param name="b">Interval b</param>
-        /// <returns>Whether the intervals intersect</returns>
+        /// <returns>Returns true if the intervals intersect, else false</returns>
         public static bool IntervalsIntersect(DateInterval a, DateInterval b)
-        {
-            return a.Start <= b.End && a.End >= b.Start;
-        }
+            => Core.DateTimeHelpers.IntervalsIntersect(a.Start, a.End, b.Start, b.End);
     }
 
     public struct DateInterval
