@@ -13,7 +13,7 @@ namespace Peazy.Core
             string separator,
             StringNullJoinStrategy nullStrategy)
         {
-            var exception = ValidateArguments(source, separator);
+            var exception = ValidateJoinArguments(source, separator);
             if (exception != null)
             {
                 throw exception;
@@ -28,7 +28,7 @@ namespace Peazy.Core
             Func<T, string> selector,
             StringNullJoinStrategy nullStrategy)
         {
-            var exception = ValidateArguments(source, separator) ?? ValidateArgument(selector);
+            var exception = ValidateJoinArguments(source, separator) ?? ValidateArgument(selector);
             if (exception != null)
             {
                 throw exception;

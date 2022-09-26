@@ -41,7 +41,7 @@ namespace Peazy.Tests.Extensions.IEnumerableExtensions
             Given.ValuesContainAllValidStrings();
             And.ValueSelectorGetsFirstFiveCharacters();
             And.ExpectTruncatedResult();
-            Then.ValuesJoinedToString()
+            Then.ValuesJoinedToStringWithSelector()
                 .Should().Be(ExpectedResult(), "Because all values do not equal null");
         }
 
@@ -71,15 +71,6 @@ namespace Peazy.Tests.Extensions.IEnumerableExtensions
             And.ExpectEmptyResult();
             Then.ValuesJoinedToString()
                 .Should().Be(ExpectedResult(), "Because values is empty");
-        }
-
-        [TestCase]
-        public void ThrowWhenValuesContainNull()
-        {
-            Given.ValuesContainOnlyNullElement();
-            Then.ValuesJoinedToStringAsAction()
-                .Should().Throw<ArgumentException>()
-                .And.ParamName.Should().Be("source", "Because values contains at least one element that equals null");
         }
 
         [Test]
@@ -136,10 +127,7 @@ namespace Peazy.Tests.Extensions.IEnumerableExtensions
 
         private void ValueSelectorGetsFirstFiveCharacters()
         {
-            _valueSelector = (str) =>
-            {
-                return str[..5];
-            };
+            _valueSelector = (str) => str.Substring(0, 5);
         }
 
         private void ExpectEmptyResult()
@@ -167,12 +155,32 @@ namespace Peazy.Tests.Extensions.IEnumerableExtensions
 
         private string ValuesJoinedToString()
         {
+            return _values.JoinToString(_delimiter, StringNullJoinStrategy.Skip);
+        }
+
+        private string ValuesJoinedToStringAndDontSkip()
+        {
+            return _values.JoinToString(_delimiter, StringNullJoinStrategy.None);
+        }
+
+        private string ValuesJoinedToStringWithSelector()
+        {
             return _values.JoinToString(_valueSelector, _delimiter, StringNullJoinStrategy.Skip);
         }
 
         private Action ValuesJoinedToStringAsAction()
         {
             return () => ValuesJoinedToString();
+        }
+
+        private Action ValuesJoinedToStringAndDontSkipAsAction()
+        {
+            return () => ValuesJoinedToStringAndDontSkip();
+        }
+
+        private Action ValuesJoinedToStringWithSelectorAsAction()
+        {
+            return () => ValuesJoinedToStringWithSelector();
         }
     }
 }

@@ -32,5 +32,20 @@ namespace Peazy.Core
 
             return null;
         }
+
+        private static Exception ValidateJoinArguments<T>(IEnumerable<T> source, string separator)
+        {
+            if (source == null)
+            {
+                return ExceptionCreationHelpers.CreateArgumentNullException(nameof(source));
+            }
+
+            if (separator == null)
+            {
+                return ExceptionCreationHelpers.CreateArgumentNullException(nameof(separator));
+            }
+
+            return null;
+        }
     }
 }
