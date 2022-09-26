@@ -6,7 +6,7 @@ using Peazy.Internal;
 
 namespace Peazy.Core
 {
-    internal static partial class IEnumerableHelpers
+    internal static partial class EnumerableHelpers
     {
         public static bool AnyStartsWith<T>(IEnumerable<T> source, Func<T, string> selector, string value, StringComparison comparisonType, StringNullStrategy nullStrategy)
         {

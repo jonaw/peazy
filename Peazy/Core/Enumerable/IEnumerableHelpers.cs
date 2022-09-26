@@ -6,7 +6,7 @@ using Peazy.Internal;
 
 namespace Peazy.Core
 {
-    internal static partial class IEnumerableHelpers
+    internal static partial class EnumerableHelpers
     {
         private static Exception ValidateArgument<T>(Func<T, string> selector)
         {

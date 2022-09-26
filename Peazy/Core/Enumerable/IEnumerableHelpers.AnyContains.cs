@@ -6,7 +6,7 @@ using Peazy.Internal;
 
 namespace Peazy.Core
 {
-    internal static partial class IEnumerableHelpers
+    internal static partial class EnumerableHelpers
     {
 		public static bool AnyContains(IEnumerable<string> source, string value, StringComparison comparisonType, StringNullStrategy nullStrategy)
         {
