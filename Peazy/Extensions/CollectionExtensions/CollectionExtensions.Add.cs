@@ -4,7 +4,7 @@ using Peazy.Core;
 
 namespace Peazy.Extensions
 {
-    public static partial class ICollectionExtensions
+    public static partial class CollectionExtensions
     {
         /// <summary>
         /// Add a range of items to a collection
@@ -14,6 +14,6 @@ namespace Peazy.Extensions
         /// <typeparam name="T">Type of collection and items</typeparam>
         /// <returns>Returns the given <paramref name="collection"/> with items added</returns>
         public static ICollection<T> AddRange<T>(this ICollection<T> collection, IEnumerable<T> items)
-            => ICollectionHelpers.AddRange(collection, items);
+            => CollectionHelpers.AddRange(collection, items);
     }
 }

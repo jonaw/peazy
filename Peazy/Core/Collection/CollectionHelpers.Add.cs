@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Peazy.Core
 {
-    internal static partial class ICollectionHelpers
+    internal static partial class CollectionHelpers
     {
         public static ICollection<T> AddRange<T>(ICollection<T> collection, IEnumerable<T> items)
         {
