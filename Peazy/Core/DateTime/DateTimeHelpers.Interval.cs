@@ -40,5 +40,22 @@ namespace Peazy.Core
 
             return dateTime >= intervalStart && dateTime <= intervalEnd;
         }
+
+        /// <summary>
+        /// Determine if two intervals intersect, inclusive
+        /// </summary>
+        /// <param name="aStart">Start of interval a</param>
+        /// <param name="aEnd">End of interval a</param>
+        /// <param name="bStart">Start of interval b</param>
+        /// <param name="bEnd">End of interval b</param>
+        /// <returns>Returns true if the intervals intersect, else false</returns>
+        public static bool IntervalsIntersect(
+            DateTime aStart,
+            DateTime aEnd,
+            DateTime bStart,
+            DateTime bEnd)
+        {
+            return aStart <= bEnd && aEnd >= bStart;
+        }
     }
 }
