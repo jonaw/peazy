@@ -25,30 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Extensions\NumericalExtensions\MapExtensions.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>MapExtensions.tt</DependentUpon>
-    </Compile>
-    <Compile Update="Extensions\NumericalExtensions\Helpers\MapImplementations.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>MapImplementations.tt</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Extensions\NumericalExtensions\MapExtensions.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MapExtensions.cs</LastGenOutput>
-    </None>
-    <None Update="Extensions\NumericalExtensions\Helpers\MapImplementations.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MapImplementations.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="T4.Build" Version="0.2.4" />
   </ItemGroup>
 

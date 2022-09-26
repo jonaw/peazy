@@ -5,12 +5,12 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
 <#
-	string[] floatingPointTypes = new []
-	{
-		"decimal",
-		"double",
-		"float"
-	};
+    string[] floatingPointTypes = new []
+    {
+        "decimal",
+        "double",
+        "float"
+    };
 #>
 /*******************************************************************************
 *                                                                              *
@@ -21,18 +21,18 @@ using Peazy.Core;
 
 namespace Peazy.Extensions
 {
-	public static partial class MapExtensions
-	{
-		<# // ****************************************************************** #>
-		<# // *                                                                * #>
-		<# // *       Create map implementations for floating point types      * #>
-		<# // *                                                                * #>
-		<# // ****************************************************************** #>
-		<#
-		foreach (var type in floatingPointTypes)
-		{
-		#>
-		/// <summary>
+    public static partial class MapExtensions
+    {
+        <# // ****************************************************************** #>
+        <# // *                                                                * #>
+        <# // *       Create map implementations for floating point types      * #>
+        <# // *                                                                * #>
+        <# // ****************************************************************** #>
+<#
+foreach (var type in floatingPointTypes)
+{
+#>
+        /// <summary>
         /// Map a value contained in a source range to value in a target range.
         /// </summary>
         /// <param name="value">Value to map</param>
@@ -41,11 +41,11 @@ namespace Peazy.Extensions
         /// <param name="targetMin">Target range minimum value</param>
         /// <param name="targetMax">Target range maximum value</param>
         /// <returns>Returns the mapped value</returns>
-		public static <#= type #> Map(this <#= type #> value, <#= type #> sourceMin, <#= type #> sourceMax, <#= type #> targetMin, <#= type #> targetMax)
-			=> NumericHelpers.Map(value, sourceMin, sourceMax, targetMin, targetMax);
+        public static <#= type #> Map(this <#= type #> value, <#= type #> sourceMin, <#= type #> sourceMax, <#= type #> targetMin, <#= type #> targetMax)
+            => NumericHelpers.Map(value, sourceMin, sourceMax, targetMin, targetMax);
 
-		<#
-		}
-		#>
-	}
+<#
+}
+#>
+    }
 }
