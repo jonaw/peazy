@@ -6,13 +6,14 @@ namespace Peazy.Extensions
 {
     public static partial class ICollectionExtensions
     {
+        /// <summary>
+        /// Add a range of items to a collection
+        /// </summary>
+        /// <param name="collection">Collection to add to</param>
+        /// <param name="items">Items to add to the collection</param>
+        /// <typeparam name="T">Type of collection and items</typeparam>
+        /// <returns>Returns the given <paramref name="collection"/> with items added</returns>
         public static ICollection<T> AddRange<T>(this ICollection<T> collection, IEnumerable<T> items)
             => ICollectionHelpers.AddRange(collection, items);
-
-        public static ICollection<T> AddIf<T>(this ICollection<T> collection, T item, bool canAdd)
-            => ICollectionHelpers.AddIf(collection, item, canAdd);
-
-        public static ICollection<T> AddWhenAll<T>(this ICollection<T> collection, T item, Func<T, bool> predicate)
-            => ICollectionHelpers.AddWhenAll(collection, item, predicate);
     }
 }
