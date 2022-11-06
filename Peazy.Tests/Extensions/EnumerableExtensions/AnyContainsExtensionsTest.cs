@@ -3,7 +3,7 @@ using NUnit.Framework;
 using Peazy.Extensions;
 using System;
 
-namespace Peazy.Tests.Extensions.IEnumerableExtensions
+namespace Peazy.Tests.Extensions.EnumerableExtensions
 {
     public class AnyContainsExtensionsTest : BaseTest<AnyContainsExtensionsTest>
     {

@@ -4,7 +4,7 @@ using Peazy.Extensions;
 using System;
 using System.Linq;
 
-namespace Peazy.Tests.Extensions.IEnumerableExtensions
+namespace Peazy.Tests.Extensions.EnumerableExtensions
 {
     public class JoinToStringExtensionsTest : BaseTest<JoinToStringExtensionsTest>
     {
