@@ -20,7 +20,7 @@ namespace Peazy.Extensions
         /// </summary>
         /// <param name="source">Items to join to a string</param>
         /// <param name="separator">Separator value to join items with</param>
-        /// <param name="nullStrategy">Strategy for handling <see cref="null"/> values contained in <paramref name="source"/></param>
+        /// <param name="nullStrategy">Strategy for handling null values contained in <paramref name="source"/></param>
         /// <returns>Returns a new string containing each value in <paramref name="source"/> separated by <paramref name="separator"/></returns>
         public static string JoinToString(this IEnumerable<string> source, string separator, StringNullJoinStrategy nullStrategy)
             => EnumerableHelpers.JoinToString(source, separator, nullStrategy);
@@ -41,7 +41,7 @@ namespace Peazy.Extensions
         /// <param name="source">Items to join to a string</param>
         /// <param name="selector">Select value to use when joining to string</param>
         /// <param name="separator">Separator value to join items with</param>
-        /// <param name="nullStrategy">Strategy for handling <see cref="null"/> values contained in <paramref name="source"/></param>
+        /// <param name="nullStrategy">Strategy for handling null values contained in <paramref name="source"/></param>
         /// <returns>Returns a new string containing each value in <paramref name="source"/> separated by <paramref name="separator"/></returns>
         public static string JoinToString<T>(this IEnumerable<T> source, Func<T, string> selector, string separator, StringNullJoinStrategy nullStrategy)
             => EnumerableHelpers.JoinToString(source, separator, selector, nullStrategy);

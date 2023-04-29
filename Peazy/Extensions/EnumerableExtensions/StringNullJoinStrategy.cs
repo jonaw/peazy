@@ -1,17 +1,17 @@
 namespace Peazy.Extensions
 {
     /// <summary>
-    /// Determine strategy for handling <see cref="null"/> values then joining values to string
+    /// Determine strategy for handling null values then joining values to string
     /// </summary>
     public enum StringNullJoinStrategy : byte
     {
-        /// <summary>Do not ignore <see cref="null"/> values when joining values to string</summary>
+        /// <summary>Do not ignore null values when joining values to string</summary>
         None = 0,
 
-        /// <summary>Skip <see cref="null"/> values when joining values to string</summary>
+        /// <summary>Skip null values when joining values to string</summary>
         Skip = 1,
 
-        /// <summary>Replace <see cref="null"/> values with an empty string when joining values to string</summary>
+        /// <summary>Replace null values with an empty string when joining values to string</summary>
         ReplaceWithEmptyString = 2
     }
 }
